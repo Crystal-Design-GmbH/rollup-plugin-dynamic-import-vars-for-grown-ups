@@ -96,7 +96,6 @@ export function dynamicImportToGlob(node, sourceString) {
 
   // glob = glob.replace(/\*\*/g, "*");
   glob = makeGlobPatternRecursive(glob);
-  console.log({ glob });
 
   if (glob.startsWith("*")) {
     throw new VariableDynamicImportError(
