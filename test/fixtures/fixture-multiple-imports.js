@@ -5,9 +5,9 @@ export class Foo {
 }
 
 import(`./module-dir-a/${name}.js`).then((module) => {
-  console.log('imported', module);
+  console.log("imported", module);
 });
 
 export function importModuleFromDir(dir, name) {
-  return import(`./${dir}/${name}.js`);
+  return import(`./dir/${dir}/${name}.js`);
 }

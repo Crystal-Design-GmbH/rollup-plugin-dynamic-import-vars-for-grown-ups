@@ -7,9 +7,11 @@
 [![size][size]][size-url]
 [![libera manifesto](https://img.shields.io/badge/libera-manifesto-lightgrey.svg)](https://liberamanifesto.com)
 
-# @rollup/plugin-dynamic-import-vars
+# rollup-plugin-dynamic-import-vars-for-grown-ups
 
-🍣 A rollup plugin to support variables in dynamic imports in Rollup.
+🍣 A rollup plugin to support variables in dynamic imports in Rollup. For grown ups.
+
+**Meaning:** You can decide yourself how many levels deep down the folder structure you want to import stuff. The main reason behind this is to implement the same behaviour webpack does.
 
 ```js
 function importLocale(locale) {
@@ -34,14 +36,14 @@ npm install @rollup/plugin-dynamic-import-vars --save-dev
 Create a `rollup.config.js` [configuration file](https://www.rollupjs.org/guide/en/#configuration-files) and import the plugin:
 
 ```js
-import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
+import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
 
 export default {
   plugins: [
     dynamicImportVars({
       // options
-    })
-  ]
+    }),
+  ],
 };
 ```
 
@@ -127,15 +129,20 @@ Is turned into:
 ```js
 function __variableDynamicImportRuntime__(path) {
   switch (path) {
-    case './locales/en-GB.js':
-      return import('./locales/en-GB.js');
-    case './locales/en-US.js':
-      return import('./locales/en-US.js');
-    case './locales/nl-NL.js':
-      return import('./locales/nl-NL.js');
+    case "./locales/en-GB.js":
+      return import("./locales/en-GB.js");
+    case "./locales/en-US.js":
+      return import("./locales/en-US.js");
+    case "./locales/nl-NL.js":
+      return import("./locales/nl-NL.js");
     default:
       return new Promise(function (resolve, reject) {
-        queueMicrotask(reject.bind(null, new Error('Unknown variable dynamic import: ' + path)));
+        queueMicrotask(
+          reject.bind(
+            null,
+            new Error("Unknown variable dynamic import: " + path)
+          )
+        );
       });
   }
 }
@@ -191,12 +198,6 @@ import(`./${foo}.js`);
 // allowed
 import(`./module-${foo}.js`);
 ```
-
-### Globs only go one level deep
-
-When generating globs, each variable in the string is converted to a glob `*` with a maximum of one star per directory depth. This avoids unintentionally adding files from many directories to your import.
-
-In the example below this generates `./foo/*/*.js` and not `./foo/**/*.js`.
 
 ```js
 import(`./foo/${x}${y}/${z}.js`);
