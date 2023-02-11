@@ -60,7 +60,7 @@
     "@ava/babel": "^2.0.0",
     "acorn": "^7.3.1",
     "acorn-dynamic-import": "^4.0.0",
-    "ava": "^3.15.0",
+    "ava": "^5.2.0",
     "del-cli": "^4.0.1",
     "prettier": "^2.0.5",
     "rollup": "^2.23.0"
